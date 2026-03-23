@@ -33,7 +33,6 @@ public class AuthController : ControllerBase
         var user = new User
         {
             Username = request.Username,
-            //Password = request.Password,
             Password = _passwordHasher.HashPassword(null, request.Password),
             Role = request.Role
         };
