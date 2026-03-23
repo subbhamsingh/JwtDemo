@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Identity;
 public class AuthController : ControllerBase
 {
     private readonly AppDbContext _db;
-    //private readonly string _key = "ThisIsMySuperSecretKey12345";
     private readonly string _key;
     private readonly PasswordHasher<User> _passwordHasher;
     private readonly IConfiguration _config;
@@ -46,7 +45,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-       
+
         var user = await _db.Users
     .FirstOrDefaultAsync(u => u.Username == request.Username);
 
@@ -66,8 +65,8 @@ public class AuthController : ControllerBase
         };
 
         var token = new JwtSecurityToken(
-             issuer: _config["Jwt:Issuer"],  
-             audience: _config["Jwt:Audience"], 
+             issuer: _config["Jwt:Issuer"],
+             audience: _config["Jwt:Audience"],
             claims: claims,
             expires: DateTime.Now.AddMinutes(30),
             signingCredentials: new SigningCredentials(
@@ -107,8 +106,8 @@ public class AuthController : ControllerBase
     };
 
         var token = new JwtSecurityToken(
-             issuer: _config["Jwt:Issuer"],    
-             audience: _config["Jwt:Audience"],  
+             issuer: _config["Jwt:Issuer"],
+             audience: _config["Jwt:Audience"],
             claims: claims,
             expires: DateTime.Now.AddMinutes(30),
             signingCredentials: new SigningCredentials(
